@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link rel="stylesheet" href="../public/css/perfil.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+<audio id="background-audio" autoplay loop>
+    <source src="/PW2MVC-PREGUNTADOS/public/sonido/sonidoHome1.mp3" type="audio/mpeg">
+</audio>
+<div class="container">
+    <div class="card">
+
+        <div class="card-header">
+            <img id="mute-icon" src="../public/imagenes/sonido/sonido.png" alt="Sonido activado" width="50" height="50"  onclick="apagarSonido()">
+
+            <div class="close">
+                <a href="vistaHome">
+                    <button class="defeat">X</button>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="card-content">
+            <div class="profile-layout">
+                <div class="profile-image">
+                    <img src="/PW2MVC-PREGUNTADOS/public/imagenes/usuarios/{{Path_img_perfil}}" alt="Foto de perfil" class="rounded-image">
+                    <h2 class="player-name">{{nombre_usuario}}</h2>
+                </div>
+                <div class="profile-info">
+                    <p class="player-location"><i class="fas fa-map-marker-alt"></i> Ubicación:</p>
+                    <section>
+                        <div id="map" style="height: 400px; width: 100%;"></div>
+
+                        <input type="hidden" id="latitude" name="longitudMapa" value="{{longitudMapa}}">
+                        <input type="hidden" id="longitude" name="latitudMapa" value="{{latitudMapa}}">
+                        <input type="hidden" id="ciudad" name="ciudad" value="{{ciudad}}">
+                        <input type="hidden" id="pais" name="pais" value="{{pais}}">
+                    </section>
+                    <div class="game-history">
+                        <h3><i class="fas fa-trophy"></i> Historial de Partidas</h3>
+                        <div class="game-header">
+                            <span>Partida Creada</span>
+                            <span>Partida Finalizada</span>
+                            <span>Descripción</span>
+                            <span>Puntos</span>
+                        </div>
+
+                        {{#partidas}}
+                            <div class="game-entry">
+                                <span>{{Fecha_creada}}</span>
+                                <span>{{Fecha_finalizada}}</span>
+                                <span>{{Descripcion}}</span>
+                                <span>{{Puntuacion}} pts</span>
+                            </div>
+                        {{/partidas}}
+                    </div>
+                </div>
+            </div>
+            <div class="qr-code">
+                <img src="../{{qrUsuario}}" alt="Código QR" >
+                <p>Escanea para más info</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../public/js/sonido.js" ></script>
+<script src="../public/js/perfil.js" ></script>
+</body>
+</html>
