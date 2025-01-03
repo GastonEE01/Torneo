@@ -134,7 +134,7 @@ class UsuarioModel
             $rutaTemporal = $_FILES["fotoIMG"]["tmp_name"];
 
             // Carpeta de destino
-            $directorioDestino = $_SERVER['DOCUMENT_ROOT'] . "/PW2MVC-PREGUNTADOS/public/imagenes/usuarios/";
+            $directorioDestino = $_SERVER['DOCUMENT_ROOT'] . "/Torneo/public/imagenes/usuarios/";
 
             // Crear nombre único para evitar conflictos
             $nombreImagen = pathinfo($archivo, PATHINFO_FILENAME);
