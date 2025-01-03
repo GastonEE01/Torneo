@@ -162,41 +162,15 @@ class UsuarioController
         if ($user && isset($user['activo']) && $user['activo'] == 1) {
             $sesion = new ManejoSesiones();
             $sesion->iniciarSesion($user);
-
             $user = $sesion->obtenerUsuario();
             $id_usuario = $sesion->obtenerUsuarioID();
             $fotoIMG = $user['Path_img_perfil'] ?? 'Invitado';
 
-            $mejoresPuntajesJugador = $this->modelPartida->trearMejoresPuntajesJugadores();
-            $partidas = $this->modelPartida->obtenerPartidasEnCurso($user['id']);
-
             // Redirige según el rol del usuario
-            if ($user['rol'] == 2) {
-                $pregutasSugeridas = $this->model->obtenerPreguntasSugeridas();
-                $reportes = $this->model-> obtenerReportes();
-                $usuarios=$this->model->ObtenerTodosLosUsuarios();
-                foreach ($reportes as &$reporte) {
-                    foreach ($usuarios as $usuario) {
-                        if ($reporte['Usuario_id'] === $usuario['id']) {
-                            $reporte['nombre_usuario'] = $usuario['nombre'];
-                            break;
-                        }
-                    }
-                }
-                    $this->presenter->render('view/editor.mustache',[
+            if ($user['rol'] == 1) {
+                $this->presenter->render('view/home.mustache', [
                     'nombre_usuario' => $user['nombre_usuario'],
                     'id' => $id_usuario,
-                    'reportes' => $reportes,
-                    'preguntasSugeridas' => $pregutasSugeridas,
-                        'Path_img_perfil' => $fotoIMG]);
-            } elseif ($user['rol'] == 3) {
-                header("Location: /Torneo/Admin/vistaAdmin");
-                exit();
-            } else {
-                $this->presenter->render('view/home.mustache', ['partidas' => $partidas,
-                    'nombre_usuario' => $user['nombre_usuario'],
-                    'id' => $id_usuario,
-                    'puntajes' => $mejoresPuntajesJugador,
                     'Path_img_perfil' => $fotoIMG]);
             }
             exit;

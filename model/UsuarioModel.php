@@ -154,24 +154,21 @@ class UsuarioModel
             $data['fotoIMG'] = 'fotoPorDefecto.png';
         }
 
-
-        $sql = "INSERT INTO usuario (nombre, nombre_usuario, contrasenia, fecha_nacimiento, pais, sexo, ciudad, email,Path_img_perfil,token,latitudMapa,longitudMapa)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
-
-        $params = [
-            $data['nombre'],
-            $data['nombre_usuario'],
-            $data['contrasenia'],
-            $data['fecha_nacimiento'],
-            $data['pais'],
-            $data['sexo'],
-            $data['ciudad'],
-            $data['email'],
-            $data['fotoIMG'],
-            $token,
-            $data['latitude'],
-            $data['longitude'],
-        ];
+            $sql = "INSERT INTO Usuario (nombre, nombre_usuario, contrasenia, fecha_nacimiento, pais, email, Path_img_perfil, plataformaStream, activo, token, rol)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $params = [
+                $data['nombre'],
+                $data['nombre_usuario'],
+                $data['contrasenia'],
+                $data['fecha_nacimiento'],
+                $data['pais'], // Asegúrate de que este valor no es nulo
+                $data['email'],
+                $data['fotoIMG'] ,
+                $data['plataformaStream'], // Asegúrate de que este valor no es nulo
+                0, // activo
+                $token,
+                1  // rol
+            ];
 
         return $this->database->execute($sql, $params);
 

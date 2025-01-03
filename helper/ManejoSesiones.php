@@ -27,12 +27,8 @@ class ManejoSesiones
             'id' => $usuario['id'] ?? null,
             'nombre_usuario' => $usuario['nombre_usuario'] ?? '',
             'pais' => $usuario['pais'] ?? '',
-            'ciudad' => $usuario['ciudad'] ?? '',
             'rol' => $usuario['rol'] ?? '',
             'activo' => $usuario['activo'] ?? '',
-            'enLinea' => 1,
-            'latitudMapa'  => $usuario['latitudMapa'],
-            'longitudMapa'  => $usuario['longitudMapa'],
             'Path_img_perfil'  => $usuario['Path_img_perfil'],
             'email'  => $usuario['email']
         ];
