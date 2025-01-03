@@ -16,6 +16,7 @@
     include_once ("helper/GeneradorQR.php");
     include_once("controller/AdminController.php");
     include_once("model/AdminModel.php");
+    include_once("view/sidebar.php");
 
     include_once('vendor/mustache/src/Mustache/Autoloader.php');
     class Configuration

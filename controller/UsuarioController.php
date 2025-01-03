@@ -168,7 +168,7 @@ class UsuarioController
 
             // Redirige según el rol del usuario
             if ($user['rol'] == 1) {
-                $this->presenter->render('view/home.mustache', [
+                $this->presenter->render('view/home.php', [
                     'nombre_usuario' => $user['nombre_usuario'],
                     'id' => $id_usuario,
                     'Path_img_perfil' => $fotoIMG]);
