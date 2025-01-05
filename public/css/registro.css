@@ -1,16 +1,16 @@
-.background-container {
+/*.background-container {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     /* background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwyQda8nS23uSuWZdqcdGqyaJLMVSWkOERvg&s');*/
-    background-image: url('https://i.imgur.com/5hlv3BM.png');
+  /*  background-image: url('https://i.imgur.com/5hlv3BM.png');
     background-size: cover; /* La imagen cubre todo el fondo */
-    background-repeat: no-repeat; /* La imagen no se repite */
-    background-position: center; /* Centra la imagen */
-    z-index: -1; /* Coloca el contenedor detrás del contenido */
-}
+/*    background-repeat: no-repeat; /* La imagen no se repite */
+  /*  background-position: center; /* Centra la imagen */
+   /* z-index: -1; /* Coloca el contenedor detrás del contenido */
+/*}
 
 .container {
     max-width: 600px;
@@ -63,16 +63,16 @@ input[type="submit"]:hover {
 }
 /* boton de stream*/
 
-.options-container {
+/*.options-container {
     display: flex;
     gap: 10px; /* Espacio entre los botones */
-    margin-bottom: 20px;
+  /*  margin-bottom: 20px;
 }
 
-.option {
+/*.option {
     width: 100px; /* Ancho fijo para los botones cuadrados */
-    height: 100px; /* Alto igual al ancho */
-    display: flex;
+/*    height: 100px; /* Alto igual al ancho */
+  /*  display: flex;
     justify-content: center;
     align-items: center;
     border: 2px solid #ddd;
@@ -80,16 +80,16 @@ input[type="submit"]:hover {
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
     font-weight: bold;
     text-align: center;
-    border-radius: 5px; /* Opcional, ligeramente redondeado */
+    border-radius: 5px;
 }
 
-.option:hover {
+/*.option:hover {
     color: #fff;
-    transform: scale(1.1); /* Efecto de zoom al pasar el cursor */
+    transform: scale(1.1);
 }
 
 .option.youtube {
-    background-color: #FFEEEE; /* Color inicial tenue */
+    background-color: #FFEEEE;
     border-color: #FF0000;
 }
 .option.youtube:hover {
@@ -97,7 +97,7 @@ input[type="submit"]:hover {
 }
 
 .option.twitch {
-    background-color: #EDEAFF; /* Color inicial tenue */
+    background-color: #EDEAFF;
     border-color: #9146FF;
 }
 .option.twitch:hover {
@@ -105,7 +105,7 @@ input[type="submit"]:hover {
 }
 
 .option.kick {
-    background-color: #E8FFE8; /* Color inicial tenue */
+    background-color: #E8FFE8;
     border-color: #00D632;
 }
 .option.kick:hover {
@@ -125,4 +125,199 @@ button {
 
 button:hover {
     background-color: #555;
+}*/
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #2a2a2a;
+    color: #fff;
+    height: 100vh;
+}
+
+.register-view{
+    height: 100%;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem 2rem;
+    height: 100%;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo-img{
+    width: 60px;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #e6e6d4;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+
+.description {
+    color: #888;
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.required {
+    color: #ff4b4b;
+}
+
+input {
+    padding: 0.75rem;
+    border-radius: 4px;
+    border: none;
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+.seccion-info-perfil {
+    width: 100%;
+    margin-top: 4rem;
+}
+
+.stream-section {
+    width: 50%;
+    float: left;
+    padding-right: 0.5rem;
+}
+
+.stream-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #e6e6d4;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.social-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.youtube {
+    background-color: #ff0000;
+}
+
+.kickstarter {
+    background-color: #2FE25A;
+}
+
+.twitch {
+    background-color: #9146ff;
+}
+
+.div-file {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-file{
+    background-color: #1a1a1a;
+    width: 7rem;
+    height: 7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+}
+
+.icon-file img{
+    color: white;
+}
+
+.optional {
+    color: #ff4b4b;
+    font-size: 0.8rem;
+}
+
+.submit-btn {
+    background-color: #ff4b4b;
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 3rem;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background-color: #ff3333;
+}
+
+.image-placeholder {
+    background-color: #ccc;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #333;
+    border-radius: 8px;
 }

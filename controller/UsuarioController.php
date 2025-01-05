@@ -22,9 +22,12 @@ class UsuarioController
 
     }
 
+
     public function vistaRegistro()
     {
-        $this->presenter->render("view/registro.mustache");
+        $this->presenter->render("view/registro.mustache",[
+
+        ]);
     }
 
     public function vistaLogin()
@@ -44,14 +47,19 @@ class UsuarioController
 
     public function vistaHome()
     {
+        $this->presenter->render("view/home.mustache",[
+
+        ]);
+
+    }
+    /*public function vistaHome()
+    {
         $sesion = new ManejoSesiones();
         $user = $sesion->obtenerUsuario();
         $sesion->iniciarSesion($user);
         $id_usuario = $sesion->obtenerUsuarioID();
 
-        if (empty($user)) {
-            $this->vistaLogin();
-            return;
+
         }
 
         $mejoresPuntajesJugador = $this->modelPartida->trearMejoresPuntajesJugadores();
@@ -64,7 +72,7 @@ class UsuarioController
                 'Path_img_perfil' => $fotoIMG,
             ]);
     }
-
+*/
     public function vistaPerfil()
     {
         $sesion = new ManejoSesiones();
