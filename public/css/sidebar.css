@@ -1,6 +1,6 @@
 :root {
     --bg-dark: #09090b;
-    --bg-card: #28282854;
+    --bg-card: #1E1E1E;
     --bg-div-bts: #080808;
     --primer-color: #262626;
     --segundo-color: #EAEBDB;
@@ -30,6 +30,7 @@ body{
     align-items: center;
 }
 
+/* Logo ------------------------------------*/
 .logo-img {
     width: 50px;
     height: 50px;
@@ -40,209 +41,41 @@ body{
     transform: scale(1.05);
 }
 
+/* Seccion botones ------------------------------------*/
 .nav-botones-principales{
-    width: 70%;
-    height: 23%;
+    width: 65px;
+    height: 200px;
     border-radius: 25px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    justify-content: space-around;
     margin-top: 50px;
     background-color: var(--bg-div-bts);
 }
 
 .nav-botones-juegos {
-    width: 70%;
-    height: 40%;
+    width: 65px;
+    height: 200px;
     border-radius: 25px;
-    background-color: var(--bg-div-bts);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    justify-content: space-around;
     margin-top: 20px;
+    background-color: var(--bg-div-bts);
 }
 
+/* Botones ------------------------------------*/
 .nav-btn {
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     border-radius: 15px;
     background-color: var(--primer-color);
     border: none;
     color: var(--segundo-color);
     cursor: pointer;
     transition: all 0.3s ease;
+    margin: auto;
 }
 
 .nav-btn:hover {
     background-color: var(--segundo-color);
     color: var(--primer-color);
-}
-
-/* Main Content Styles */
-.main-content {
-    margin-left: 64px;
-    padding: 2rem;
-}
-
-/* Hero Section */
-.hero-section {
-    height: 400px;
-    border-radius: 12px;
-    background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image%20(3)-E166Na8L57ZnTTgEtIqZZgY9PJX07X.png');
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    margin-bottom: 2rem;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 50%;
-    left: 2rem;
-    transform: translateY(-50%);
-    z-index: 2;
-}
-
-.most-played {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-    margin-bottom: 0.5rem;
-}
-
-.game-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-}
-
-.play-btn {
-    padding: 0.5rem 2rem;
-    background-color: var(--accent);
-    color: black;
-    border: none;
-    border-radius: 9999px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.play-btn:hover {
-    background-color: #e4e4e7;
-}
-
-/* Stats Grid */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-}
-
-.stats-card {
-    background-color: var(--bg-card);
-    border-radius: 8px;
-    padding: 1rem;
-}
-
-.card-title {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    margin-bottom: 1rem;
-}
-
-/* Activity Graph */
-.activity-graph {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    height: 100px;
-    margin-bottom: 1rem;
-}
-
-.bar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.bar {
-    width: 16px;
-    height: 40px;
-    background-color: #3f3f46;
-    border-radius: 2px;
-}
-
-.bar-container span {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-}
-
-/* Stats Container */
-.stats-container {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 1rem;
-}
-
-.stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.stat-value {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.stat-label {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-}
-
-/* Champions Container */
-.champions-container {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 1rem;
-}
-
-.champion {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.champion-img {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: #3f3f46;
-}
-
-.champion span {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-}
-
-/* View Button */
-.view-btn {
-    width: 100%;
-    padding: 0.5rem;
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.view-btn:hover {
-    color: var(--text-primary);
 }
