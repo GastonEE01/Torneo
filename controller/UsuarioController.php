@@ -75,40 +75,12 @@ class UsuarioController
 */
     public function vistaPerfil()
     {
-        $sesion = new ManejoSesiones();
-        $user = $sesion->obtenerUsuario();
-        $id_usuario = $sesion->obtenerUsuarioID();
-        $pais = $user['pais'] ?? 'Invitado';
-        $ciudad = $user['ciudad'] ?? 'Invitado';
-        $nombre_usuario = $user['nombre_usuario'] ?? 'Invitado';
-        $gmail= $user['email'] ?? 'Invitado';
-        $longitudMapa = $user['latitudMapa'] ?? 'Invitado';
-        $latitudMapa = $user['longitudMapa'] ?? 'Invitado';
-        $fotoIMG = $user['Path_img_perfil'] ?? 'Invitado';
+        $this->presenter->render("view/perfil.mustache");
 
-        if (empty($user)) {
-            $this->vistaLogin();
-            return;
-        }
-
-        $partidas = $this->modelPartida->obtenerPartidasFinalizada($user['id']);
-        $generarQR = $this->generadorQR->generarQRUsuario($nombre_usuario,$ciudad,$pais,$gmail);
-
-
-        $this->presenter->render('view/perfil.mustache', ['partidas' => $partidas,
-            'nombre_usuario' => $nombre_usuario,
-            'id' => $id_usuario,
-            'pais' => $pais,
-            'ciudad' => $ciudad,
-            'fotoIMG' => $fotoIMG,
-            'longitudMapa' => $longitudMapa,
-            'latitudMapa' => $latitudMapa,
-            'Path_img_perfil' => $fotoIMG,
-            'qrUsuario'=> $generarQR,
-            'email'=> $gmail,
-
-        ]);
     }
+
+
+
 
     public  function registro($data){
         $errors = [];
