@@ -79,6 +79,11 @@ class UsuarioController
 
     }
 
+    public function clip()
+    {
+        $this->presenter->render("view/clip.mustache");
+
+    }
 
 
 

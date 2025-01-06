@@ -1,0 +1,115 @@
+/* General Styles */
+body {
+    background-color: #332323;
+    color: #FFF;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.contenedor {
+    margin-left: 20%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+    gap: 20px; /* Espaciado entre filas y columnas */
+    /* background-color: red;*/
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.clip {
+    /* background-color: blue;*/
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; /* Contenido interno en columna */
+    justify-content: space-between; /* Distribuye los elementos verticalmente */
+    height: 350px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.clip-title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.clip-info {
+    background-color: red;
+    display: flex;
+    align-items: center; /* Centra verticalmente los elementos */
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.clip-user {
+    font-size: 12px;
+    color: #AAA;
+    margin-left: auto; /* Empuja este elemento hacia la derecha */
+    text-align: right; /* Alinea el texto a la derecha */
+}
+
+.imgUser {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    object-fit: cover; /* Recorta la imagen para ajustarse */
+    margin-left: 10px; /* Añade espacio entre el texto y la imagen */
+}
+
+.imgClip {
+    width: 100%; /* Ocupa todo el ancho */
+    height: 100%; /* Ocupa todo el alto del contenedor */
+    overflow: hidden; /* Asegúrate de que nada salga del contenedor */
+}
+
+.cabeza {
+    margin-left: 20%;
+    /* background-color: orange;*/
+    text-align: center; /* Centra el texto horizontalmente */
+    padding: 20px 0; /* Espaciado interno */
+    box-sizing: border-box; /* Incluye el padding en el ancho */
+    position: relative; /* Permite personalizar la posición si es necesario */
+}
+/*
+.clipCabeza{
+    display: flex;
+    justify-content: space-between;
+}*/
+body h1 {
+    background-color:gray;
+    border-radius: 10px;
+    display: inline-block; /* El fondo solo ocupa el tamaño del texto */
+    padding: 10px 20px; /* Espaciado interno para un mejor diseño */
+    margin: 0 auto; /* Centra el texto en el contenedor */
+}
+
+body h2{
+    font-size: 50px;
+    background-color: blue;
+}
+
+
+.clipCabeza {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Asegura que cada elemento tenga su propia altura */
+    gap: 20px; /* Añade separación horizontal entre los elementos */
+}
+
+.discord {
+    background-color: rgb(32, 27, 27);
+    border-radius: 10px;
+    display: inline-block; /* Ajusta el fondo al tamaño del texto */
+    padding: 10px 20px; /* Añade espacio interno */
+    margin-top: 10px; /* Añade espacio entre el párrafo y Discord */
+    cursor: pointer; /* Cambia el cursor al pasar */
+}
+
+
+body p{
+    margin-top: 120px;
+    background-color: black;
+
+    width: 50%;
+}
+
