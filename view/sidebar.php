@@ -24,11 +24,5 @@
         <button class="nav-btn">
             <i class="icon-sword">S</i>
         </button>
-        <button class="nav-btn">
-            <i class="icon-moon">N</i>
-        </button>
-        <button class="nav-btn">
-            <i class="icon-moon">N</i>
-        </button>
     </div>
 </nav>
