@@ -25,17 +25,12 @@ class UsuarioController
 
     public function vistaRegistro()
     {
-        $this->presenter->render("view/registro.mustache",[
-
-        ]);
+        $this->presenter->render("view/registro.mustache", []);
     }
 
     public function vistaLogin()
     {
-        // Si pongo esto se rompe la parte de las pregunta partida
-        // $sesion = new ManejoSesiones();
-        // $sesion->limpiarCache();
-        $this->presenter->render("view/login.mustache");
+        $this->presenter->render("view/login.mustache", []);
     }
 
     public function cerrarSesion()
@@ -45,68 +40,69 @@ class UsuarioController
         $this->presenter->render("view/login.mustache");
     }
 
-    public function vistaHome()
-    {
+    public function clip() {
         $sidebarContent = file_get_contents("view/template/sidebar.mustache");
         $footerContent = file_get_contents("view/template/footer.mustache");
         $headerContent = file_get_contents("view/template/header.mustache");
 
-        $this->presenter->render("view/home.mustache",[
+        $this->presenter->render("view/clip.mustache", [
             "sidebar" => $sidebarContent,
             "footer" => $footerContent,
-            "header " => $headerContent,
+            "header" => $headerContent,
+        ], [
+            'includeHeader' => false,
+            'includeFooter' => true,
+            'includeSidebar' => true,
         ]);
-
     }
 
-    public function clip()
-    {
+    public function vistaHome() {
         $sidebarContent = file_get_contents("view/template/sidebar.mustache");
         $footerContent = file_get_contents("view/template/footer.mustache");
+        $headerContent = file_get_contents("view/template/header.mustache");
 
-        $this->presenter->render("view/clip.mustache",[
+        $this->presenter->render("view/home.mustache", [
             "sidebar" => $sidebarContent,
             "footer" => $footerContent,
+            "header" => $headerContent,
+        ], [
+            'includeHeader' => true,
+            'includeFooter' => true,
+            'includeSidebar' => true,
         ]);
-
     }
 
-
-    /*public function vistaHome()
-    {
-        $sesion = new ManejoSesiones();
-        $user = $sesion->obtenerUsuario();
-        $sesion->iniciarSesion($user);
-        $id_usuario = $sesion->obtenerUsuarioID();
-
-
-        }
-
-        $mejoresPuntajesJugador = $this->modelPartida->trearMejoresPuntajesJugadores();
-        $partidas = $this->modelPartida->obtenerPartidasEnCurso($user['id']);
-        $fotoIMG = $user['Path_img_perfil'] ?? 'Invitado';
-            $this->presenter->render('view/home.mustache', ['partidas' => $partidas,
-                'nombre_usuario' => $user['nombre_usuario'],
-                'id' => $id_usuario,
-                'puntajes' => $mejoresPuntajesJugador,
-                'Path_img_perfil' => $fotoIMG,
-            ]);
-    }
-*/
 
     public function vistaPerfil() {
         $sidebarContent = file_get_contents("view/template/sidebar.mustache");
 
-        // No incluir header ni footer
         $this->presenter->render("view/perfil.mustache", [
             "sidebar" => $sidebarContent,
-
+        ], [
+            'includeHeader' => false,
+            'includeFooter' => false,
+            'includeSidebar' => true,
         ]);
     }
 
 
 
-    public  function registro($data){
+    public function a()
+    {
+        $sidebarContent = file_get_contents("view/template/sidebar.mustache");
+
+        // No incluir header ni footer
+        $this->presenter->render("view/a.mustache", [
+               "sidebar" => $sidebarContent,
+        ]);
+    }
+
+
+
+
+/*
+
+        public  function registro($data){
         $errors = [];
 
         // Validar email
@@ -266,6 +262,6 @@ class UsuarioController
         ]);
     }
 
-
+*/
 
 }
