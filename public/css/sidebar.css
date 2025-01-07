@@ -10,6 +10,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 body{
@@ -44,7 +45,7 @@ body{
 /* Seccion botones ------------------------------------*/
 .nav-botones-principales{
     width: 65px;
-    height: 200px;
+    height: 290px;
     border-radius: 25px;
     display: flex;
     flex-direction: column;
