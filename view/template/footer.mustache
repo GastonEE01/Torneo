@@ -1,25 +1,32 @@
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../../public/css/styles.css"> <!-- Asegúrate de que la ruta sea correcta -->
-</head>
-<body>
-{{#logeado}}
-<footer >
-                <div>
-                    <div>
-                        <h2>Grupo 9:</h2>
-                    </div>
-                    <div>
-                            <p>Cardelli, Agustin</p>
-                            <p>Diaz, Brenda</p>
-                            <p>Dominguez, Agustin</p>
-                            <p>Oviedo, Joaquín</p>
-                            <p>Weigel Muñoz, Felipe</p>
-                    </div>
-                </div>
+<footer>
+
+    <!-- First Row -->
+    <div class="footer-row">
+        <div>
+            <!--<div class="footer-logo">PUSH</div>-->
+            <img src="../public/imagenes/push.svg" height="50px" alt="logo">
+            <div class="copyright">&copy; 2025</div>
+        </div>
+        <p class="footer-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+        <div class="footer-columns">
+            <div class="footer-column">
+                <span>Home</span>
+                <span>Clips</span>
+            </div>
+            <div class="footer-column">
+                <span>Juegos</span>
+                <span>Nosotros</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Row -->
+    <div class="footer-bottom">
+        <div class="footer-links">
+            <a href="#" class="footer-link">Instagram</a>
+            <a href="#" class="footer-link">Discord</a>
+            <a href="#" class="footer-link">TikTok</a>
+        </div>
+        <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">&uarr;</button>
+    </div>
 </footer>
-{{/logeado}}
-</body>

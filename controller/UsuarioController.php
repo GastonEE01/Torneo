@@ -47,11 +47,31 @@ class UsuarioController
 
     public function vistaHome()
     {
-        $this->presenter->render("view/home.mustache",[
+        $sidebarContent = file_get_contents("view/template/sidebar.mustache");
+        $footerContent = file_get_contents("view/template/footer.mustache");
+        $headerContent = file_get_contents("view/template/header.mustache");
 
+        $this->presenter->render("view/home.mustache",[
+            "sidebar" => $sidebarContent,
+            "footer" => $footerContent,
+            "header " => $headerContent,
         ]);
 
     }
+
+    public function clip()
+    {
+        $sidebarContent = file_get_contents("view/template/sidebar.mustache");
+        $footerContent = file_get_contents("view/template/footer.mustache");
+
+        $this->presenter->render("view/clip.mustache",[
+            "sidebar" => $sidebarContent,
+            "footer" => $footerContent,
+        ]);
+
+    }
+
+
     /*public function vistaHome()
     {
         $sesion = new ManejoSesiones();
@@ -73,16 +93,15 @@ class UsuarioController
             ]);
     }
 */
-    public function vistaPerfil()
-    {
-        $this->presenter->render("view/perfil.mustache");
 
-    }
+    public function vistaPerfil() {
+        $sidebarContent = file_get_contents("view/template/sidebar.mustache");
 
-    public function clip()
-    {
-        $this->presenter->render("view/clip.mustache");
+        // No incluir header ni footer
+        $this->presenter->render("view/perfil.mustache", [
+            "sidebar" => $sidebarContent,
 
+        ]);
     }
 
 

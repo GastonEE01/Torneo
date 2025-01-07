@@ -1,31 +1,51 @@
-/* General Styles */
 body {
     background-color: #332323;
     color: #FFF;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
-
+/*
 .contenedor {
-    margin-left: 20%;
+    background-color: #00dd00;
+    margin-left: 7%;
+    margin-bottom: 100px;
+    height: 10px;
+    border: 2px solid #0000cc;
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
-    gap: 20px; /* Espaciado entre filas y columnas */
-    /* background-color: red;*/
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
     padding: 20px;
     box-sizing: border-box;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+*/
+.contenedor {
+    margin-left: 7%;
+    height: 440px;
+    margin-bottom: 100px;
+    border: 2px solid #0000cc;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
 }
 
+
 .clip {
-    /* background-color: blue;*/
     border-radius: 10px;
     display: flex;
     flex-direction: column; /* Contenido interno en columna */
     justify-content: space-between; /* Distribuye los elementos verticalmente */
-    height: 350px;
-    padding: 10px;
+    padding: 20px;
     box-sizing: border-box;
+    min-height: 350px; /* Altura mínima para los clips */
 }
 
 .clip-title {
@@ -36,7 +56,7 @@ body {
 .clip-info {
     background-color: red;
     display: flex;
-    align-items: center; /* Centra verticalmente los elementos */
+    align-items: center;
     padding: 10px;
     box-sizing: border-box;
 }
@@ -52,21 +72,22 @@ body {
     border-radius: 50%;
     width: 35px;
     height: 35px;
-    object-fit: cover; /* Recorta la imagen para ajustarse */
-    margin-left: 10px; /* Añade espacio entre el texto y la imagen */
+    object-fit: cover;
+    margin-left: 10px;
 }
 
 .imgClip {
-    width: 100%; /* Ocupa todo el ancho */
-    height: 100%; /* Ocupa todo el alto del contenedor */
-    overflow: hidden; /* Asegúrate de que nada salga del contenedor */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen para que ocupe todo el espacio disponible sin deformarse */
 }
 
+
+
 .cabeza {
-    margin-left: 20%;
-    /* background-color: orange;*/
+    margin-left: 7%;
     text-align: center; /* Centra el texto horizontalmente */
-    padding: 20px 0; /* Espaciado interno */
+    padding: 10px 0; /* Espaciado interno */
     box-sizing: border-box; /* Incluye el padding en el ancho */
     position: relative; /* Permite personalizar la posición si es necesario */
 }
@@ -76,16 +97,15 @@ body {
     justify-content: space-between;
 }*/
 body h1 {
+    font-size: 70px;
     background-color:gray;
     border-radius: 10px;
-    display: inline-block; /* El fondo solo ocupa el tamaño del texto */
     padding: 10px 20px; /* Espaciado interno para un mejor diseño */
     margin: 0 auto; /* Centra el texto en el contenedor */
 }
 
 body h2{
     font-size: 50px;
-    background-color: blue;
 }
 
 
@@ -103,11 +123,12 @@ body h2{
     padding: 10px 20px; /* Añade espacio interno */
     margin-top: 10px; /* Añade espacio entre el párrafo y Discord */
     cursor: pointer; /* Cambia el cursor al pasar */
+    margin-right: 30px;
 }
 
 
 body p{
-    margin-top: 120px;
+    margin-top: 70px;
     background-color: black;
 
     width: 50%;
