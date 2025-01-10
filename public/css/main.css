@@ -1,6 +1,449 @@
+@font-face {
+    font-family: 'zuume';
+    src: url(../public/fonts/Zuume_Black_Italic.ttf);
+    font-style: italic;
+}
+
 /* Seccion main ------------------------------------*/
 
 main {
     width: calc(100% - 100px);
     float: right;
+}
+
+.contenido-hero {
+    width: 100%;
+    height: 100vh;
+    padding: 50px;
+}
+
+.contenido-arriba {
+    width: 100%;
+    height: 50%;
+    display: flex;
+}
+
+.texto-hero-grande {
+    width: 50%;
+}
+    
+.texto-hero-grande {
+    font-size: 2rem;
+    font-family: "Zuume Black Italic";
+    width: 50%;
+    background-color: blue;
+}
+
+.card-img-1 {
+    width: 50%;
+    height: 100%;
+    background-color: aqua;
+}
+
+.contenido-abajo {
+    width: 100%;
+    height: 50%;
+    display: flex;
+}
+
+.card-img-2 {
+    width: 50%;
+    height: 100%;
+    background-color: blueviolet;
+}
+
+.texto-hero-parrafo {
+    width: 50%;
+    height: 100%;
+    background-color: brown;
+}
+
+/* Seccion banner scroll */
+
+.banner{
+    width: 100%;
+    height: 100px;
+    background-color: #282828;
+    margin-bottom: 10px;
+}
+
+.contenido-scroll {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.scroll-text {
+    display: flex;
+    white-space: nowrap;
+    animation: scroll 10s linear infinite;
+    color: #ffffff;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.asterisco {
+    color: #ff3333;
+    margin: 0 10px;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+
+/* Seccion que es push? */
+
+.section-info-push {
+    width: 100%;
+    height: 100vh;
+    padding: 50px;
+    background-image: url(fondo-seccion.svg);
+    background-color: #282828;
+    background-size: cover;
+}
+
+.contenido-info-push {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.texto-que-es-push {
+    width: 50%;
+
+    h1{
+        font-size: 7rem;
+        font-family: 'zuume';
+        font-style: italic;
+        font-weight: 500;
+        color: #ff3333;
+        margin: -50px 0px -20px 0px;
+    }
+
+    .signo {
+        color: #EAEBDB;
+        font-weight: 900;
+    }
+    
+    img{
+        width: 32rem;
+    }
+}
+
+.layout-info-push {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.card-info-push {
+    width: 90%;
+    height: 500px;
+    background-color: white;
+    border-radius: 25px;
+    padding: 30px 20px 0px 20px;
+}
+
+.texto-info-push {
+    width: 100%;
+    height: 400px;
+
+    p{
+        font-size: 2rem;
+        font-family: Arial, sans-serif;
+    }
+}
+
+.botones-info-push {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .button-info-video {
+        background-color: #ff4b4b;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        font-size: 30px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        width: 45%;
+        padding: 10px;
+        font-family: 'zuume';
+    }
+
+    .button-mas-info {
+        background-color: #282828;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        font-size: 30px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        width: 35%;
+        padding: 10px;
+        font-family: 'zuume';
+    }
+
+    .button-info-video:hover {
+        background-color: #ff3333;
+    }
+
+    .button-mas-info:hover {
+        background-color: #383838;
+    }
+}
+
+/* Seccion tutorial info */
+
+.section-info-tutorial {
+    width: 100%;
+    height: 100vh;
+    background-color: #EAEBDB;
+    padding: 50px;
+}
+
+.contenido-info-tutorial {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.textos-info-tutorial {
+    width: 50%;
+    height: 100%;
+    position: relative;
+
+    h1{
+        font-family: 'zuume';
+        font-style: italic;
+        font-weight: 500;
+        color: #ff3333;
+        font-size: 8rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+        position: absolute;
+        bottom: 50px;
+    }
+
+    p span {
+        font-family: 'zuume';
+        color: #ff3333;
+        font-style: italic;
+    }
+
+}
+
+.layout-card-info-tutorial {
+    width: 50%;
+    height: 100%;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.card-info-tutorial {
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    background-color: #ff3333;
+    position: relative;
+
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 25px;
+    }
+
+    button{
+        width: 50%;
+        height: 80px;
+        padding: 15px;
+        background-color: #EAEBDB;
+        color: #ff3333;
+        font-family: 'zuume';
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        border-radius: 15px;
+        font-size: 3rem;
+        text-align: center;
+        border: none;
+    }
+
+    button:hover {
+        background-color: #ff3333;
+        color: #EAEBDB;
+    }
+
+}
+
+.separacion-color {
+    width: 100%;
+    height: 20px;
+    bottom: 0px;
+    background-color: #ff3333;
+}
+
+
+/* Seccion tutorial comparte */
+
+.section-info-compartir {
+    width: 100%;
+    height: 100vh;
+    background-color: #282828;
+    padding: 50px;
+}
+
+.contenido-info-compartir {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.layout-card-info-compartir {
+    width: 50%;
+    height: 100%;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.card-info-compartir {
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    background-color: #ff3333;
+    position: relative;
+
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 25px;
+    }
+}
+
+.textos-info-compartir {
+    width: 50%;
+    height: 100%;
+    position: relative;
+
+    h1{
+        font-family: 'zuume';
+        font-style: italic;
+        font-weight: 500;
+        color: white;
+        font-size: 8rem;
+        float: right;
+        text-align: right;
+    }
+
+    p {
+        font-size: 1.4rem;
+        position: absolute;
+        bottom: 50px;
+        right: 0px;
+        color: white;
+        text-align: right;
+        letter-spacing: 1px;
+    }
+
+    p span {
+        font-family: 'zuume';
+        color: #ff3333;
+        font-style: italic;
+    }
+
+}
+
+/* Seccion footer */
+
+
+footer {
+    width: 100%;
+    height: 300px;
+    background-color: #282828;
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+}
+
+.footer-img-push {
+    width: 33%;
+    height: 100%;
+    position: relative;
+
+    img {
+        width: 17rem;
+    }
+
+    p {
+        color: #EAEBDB;
+        position: absolute;
+        left: 0px;
+        bottom: 0px;
+    }
+}
+
+.layout-parrafo-footer {
+    width: 33%;
+}
+
+.parrafo-footer {
+    width: 100%;
+    height: 50%;
+    p {
+        color: #EAEBDB;
+    }
+}
+
+.redes-footer {
+    width: 100%;
+    height: 50%;
+    position: relative;
+
+    ul {
+        position: absolute;
+        bottom: 0px;
+    }
+
+    li {
+        list-style: none;
+        display: inline;
+    }
+
+    a{
+        text-decoration: none;
+        color: #EAEBDB;
+        padding-right: 50px;
+    }    
+}
+
+.layout-boton-arriba {
+    width: 33%;
+    height: 100%;
+    position: relative;
+
+    button {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        background-color: #EAEBDB;
+        padding: 20px;
+        border-radius: 15px;
+        border: none;
+    }
 }
