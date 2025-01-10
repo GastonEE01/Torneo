@@ -119,27 +119,26 @@
             <h1 class="title">Bienvenido</h1>
             <p class="description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit</p>
 
-            <form class="form-grid">
+            <form action="/Torneo/Usuario/registro" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Correo Electronico <span class="required">*</span></label>
-                    <input type="email" required>
+                    <input type="email" name="email" required>
                 </div>
 
                 <div class="form-group">
                     <label>Nombre de Usuario <span class="required">*</span></label>
-                    <input type="text" required>
+                    <input type="text" name="nombre_usuario" required>
                 </div>
 
                 <div class="form-group">
                     <label>Contraseña <span class="required">*</span></label>
-                    <input type="password" required>
+                    <input type="password"  name="contrasenia" required>
                 </div>
 
                 <div class="form-group">
                     <label>Repetir Contraseña <span class="required">*</span></label>
-                    <input type="password" required>
+                    <input type="password" name="repeatPassword" required>
                 </div>
-            </form>
             <div class="seccion-info-perfil">
                 <div class="stream-section">
                     <h2 class="stream-title">Stream</h2>
@@ -156,7 +155,8 @@
                 </div>
                 <div class="div-file">
                     <div class="icon-file">
-                        <img src="../public/imagenes/upload-icon.svg" alt="logo">
+                        <input src="../public/imagenes/upload-icon.svg" class=""  alt="logo" type="file" id="fotoIMG"  name="fotoIMG" accept="image/*">
+
                     </div>
                 </div>
 
@@ -164,9 +164,12 @@
             <button class="submit-btn">Registrarse</button>
         </div>
 
+    </div>
         <div class="image-placeholder">
             IMG
         </div>
+        </form>
+
     </div>
 </div>
 </body>

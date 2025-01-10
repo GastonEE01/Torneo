@@ -10,44 +10,56 @@ class UsuarioModel
         $this->database = $database;
     }
 
-    public function loginUser($nombre_usuario, $contrasenia)
+    public function loginUser($email, $contrasenia)
     {
-        if (empty($nombre_usuario) || empty($contrasenia)) {
-            return null;
+        if (empty($email) || empty($contrasenia)) {
+            return null; // Devuelve null si los datos están incompletos
         }
 
-        $sql = "SELECT contrasenia FROM usuario WHERE nombre_usuario = ?"; //buscamos la contraseña hasheada
-        $stmt1 = $this->database->execute($sql, [$nombre_usuario]);
-
-        if (empty($stmt1)) {
-            return null;
+        // Buscar la contraseña hasheada por email
+        $sql = "SELECT contrasenia FROM usuario WHERE email = ?";
+        $stmt = $this->database->getConnection()->prepare($sql);
+        if (!$stmt) {
+            die('Error en la preparación de la consulta: ' . $this->database->getConnection()->error);
         }
 
-        $hashAlmacenado = $stmt1[0]['contrasenia'];//almacenamos la contraceña hasheada
-        if ($hashAlmacenado && password_verify($contrasenia, $hashAlmacenado)) {//verificamos si la contraceña que ingreso el usuario concuerda con la contraseña hasheada en la base de datos
-
-            // Contraseña válida
-            $sql = "SELECT * FROM usuario WHERE nombre_usuario = ?"; // Usamos la clase Conexion_db, que ya tiene la conexión manejada
-            $stmt = $this->database->getConnection()->prepare($sql); // Accedemos a la conexion
-            if ($stmt === false) {
-                die('Error en la preparación de la consulta: ' . $this->database->getConnection()->error);
-            }
-            $stmt->bind_param("s", $nombre_usuario);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            if ($result->num_rows > 0) {
-                return $result->fetch_assoc();
-            } else {
-                return null;
-            }
-
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows === 0) {
             $stmt->close();
-        } else {
-            return null;
+            return null; // Email no encontrado
         }
 
+        $hashAlmacenado = $result->fetch_assoc()['contrasenia'];
+        $stmt->close();
+
+        // Verificar la contraseña ingresada contra el hash almacenado
+        if (!password_verify($contrasenia, $hashAlmacenado)) {
+            return null; // Contraseña incorrecta
+        }
+
+        // Obtener datos completos del usuario
+        $sql = "SELECT * FROM usuario WHERE email = ?";
+        $stmt = $this->database->getConnection()->prepare($sql);
+        if (!$stmt) {
+            die('Error en la preparación de la consulta: ' . $this->database->getConnection()->error);
+        }
+
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows === 0) {
+            $stmt->close();
+            return null; // Usuario no encontrado
+        }
+
+        $usuario = $result->fetch_assoc();
+        $stmt->close();
+
+        return $usuario; // Devuelve los datos del usuario
     }
+
 
     public function crearSugerenciaPregunta($data, $id_usuario)
     {
@@ -67,7 +79,8 @@ class UsuarioModel
         $this->database->execute($sql, $params);
     }
 
-    public function crearReportePregunta($data, $idUsuario){
+    public function crearReportePregunta($data, $idUsuario)
+    {
         $sql = "INSERT INTO reporte (Pregunta_id, Descripcion, Usuario_id)
             VALUES (?,?,?)";
 
@@ -79,17 +92,17 @@ class UsuarioModel
         $this->database->execute($sql, $params);
     }
 
-  public function obtenerPreguntasSugeridas()
-  {
-      $sql = "SELECT * FROM sugerencia";
-      try {
+    public function obtenerPreguntasSugeridas()
+    {
+        $sql = "SELECT * FROM sugerencia";
+        try {
 
-          $result = $this->database->execute($sql, []);
-          return $result;
-      } catch (PDOException $e) {
-          error_log("Error al obtener preguntas sugeridas: " . $e->getMessage());
-      }
-  }
+            $result = $this->database->execute($sql, []);
+            return $result;
+        } catch (PDOException $e) {
+            error_log("Error al obtener preguntas sugeridas: " . $e->getMessage());
+        }
+    }
 
     public function obtenerReportes()
     {
@@ -109,7 +122,7 @@ class UsuarioModel
     public function ObtenerTodosLosUsuarios()
     {
         $sql = "SELECT * FROM usuario";
-        $result =$this->database->execute($sql,[]);
+        $result = $this->database->execute($sql, []);
         return $result;
     }
 
@@ -127,7 +140,8 @@ class UsuarioModel
         return $count > 0;
     }
 
-    public function crearUsuario($data,$token) {
+    public function crearUsuario($data, $token)
+    {
         if (isset($_FILES["fotoIMG"]) && $_FILES["fotoIMG"]["error"] === UPLOAD_ERR_OK) {
             // Nombre del archivo y ruta temporal
             $archivo = $_FILES["fotoIMG"]["name"];
@@ -144,7 +158,7 @@ class UsuarioModel
             // Mover el archivo
             if (move_uploaded_file($rutaTemporal, $rutaDestino)) {
                 error_log("Imagen subida exitosamente a: $rutaDestino");
-                $data['fotoIMG'] =  $nombreImagen . "_" . time() . "." . $extension;
+                $data['fotoIMG'] = $nombreImagen . "_" . time() . "." . $extension;
 
             } else {
                 die("Error al mover el archivo a la carpeta destino.");
@@ -153,22 +167,20 @@ class UsuarioModel
             // Si no se sube una imagen, guarda un valor por defecto o null
             $data['fotoIMG'] = 'fotoPorDefecto.png';
         }
+        $data['banner'] = 'bannerPorDefecto.png';
 
-            $sql = "INSERT INTO Usuario (nombre, nombre_usuario, contrasenia, fecha_nacimiento, pais, email, Path_img_perfil, plataformaStream, activo, token, rol)
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $params = [
-                $data['nombre'],
-                $data['nombre_usuario'],
-                $data['contrasenia'],
-                $data['fecha_nacimiento'],
-                $data['pais'], // Asegúrate de que este valor no es nulo
-                $data['email'],
-                $data['fotoIMG'] ,
-                $data['plataformaStream'], // Asegúrate de que este valor no es nulo
-                0, // activo
-                $token,
-                1  // rol
-            ];
+        $sql = "INSERT INTO Usuario (nombre_usuario, contrasenia, email, Path_img_perfil, plataformaStream, activo, token,banner)
+              VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+        $params = [
+            $data['nombre_usuario'],
+            $data['contrasenia'],
+            $data['email'],
+            $data['fotoIMG'],
+            $data['plataformaStream'], // Asegúrate de que este valor no es nulo
+            0, // activo
+            $token,
+            $data['banner'],
+        ];
 
         return $this->database->execute($sql, $params);
 
@@ -185,10 +197,10 @@ class UsuarioModel
         return $result->num_rows > 0;
     }
 
-    public function activarUsuario($userId,$token)
+    public function activarUsuario($userId, $token)
     {
 
-        if ($this->validarToken($userId,$token)){
+        if ($this->validarToken($userId, $token)) {
 
             // Actualizar la cuenta del usuario para activarla
             $sql = "UPDATE usuario SET activo = 1 WHERE id = ?";
@@ -197,6 +209,35 @@ class UsuarioModel
             $stmt->execute();
         }
     }
-}
 
+
+    /*public function cambiarFotoPerfil($nombre_usuario,$fotoPerfil)
+    {
+
+        $sql = "UPDATE usuario SET Path_img_perfil = ? WHERE nombre_usuario = ?";
+        $params = [$fotoPerfil, $nombre_usuario];
+        return $this->database->execute($sql, $params);
+    }*/
+
+    public function cambiarFotoPerfil($id_usuario, $nombreArchivo)
+    {
+        $sql = "UPDATE usuario SET Path_img_perfil = ? WHERE id = ?";
+        $params = [$nombreArchivo, $id_usuario];
+        return $this->database->execute($sql, $params);
+    }
+
+    public function cambiarBanner($id_usuario, $nombreArchivo)
+    {
+        $sql = "UPDATE usuario SET banner = ? WHERE id = ?";
+        $params = [$nombreArchivo, $id_usuario];
+        return $this->database->execute($sql, $params);
+    }
+
+    public function actualizarPlataformaStream($id_usuario, $nuevaUrl) {
+        $sql = "UPDATE usuario SET plataformaStream = ? WHERE id = ?";
+        $params = [$nuevaUrl, $id_usuario];
+        return $this->database->execute($sql, $params);
+    }
+
+}
 ?>

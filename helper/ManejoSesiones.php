@@ -26,11 +26,11 @@ class ManejoSesiones
         $_SESSION['usuario'] = [
             'id' => $usuario['id'] ?? null,
             'nombre_usuario' => $usuario['nombre_usuario'] ?? '',
-            'pais' => $usuario['pais'] ?? '',
-            'rol' => $usuario['rol'] ?? '',
             'activo' => $usuario['activo'] ?? '',
             'Path_img_perfil'  => $usuario['Path_img_perfil'],
-            'email'  => $usuario['email']
+            'email'  => $usuario['email'],
+            'banner'  => $usuario['banner'],
+
         ];
     }
 

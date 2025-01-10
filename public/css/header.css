@@ -9,4 +9,6 @@ header {
     height: 100px;
     width: 100px;
     border: 5px solid black;
+    object-fit: cover;
+    overflow: hidden;
 }

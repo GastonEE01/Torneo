@@ -22,7 +22,6 @@ class UsuarioController
 
     }
 
-
     public function vistaRegistro()
     {
         $this->presenter->render("view/registro.mustache", []);
@@ -72,35 +71,30 @@ class UsuarioController
         ]);
     }
 
-
     public function vistaPerfil() {
+        $sesion = new ManejoSesiones();
+        $id_usuario = $sesion->obtenerUsuarioID();
+        $user = $sesion->obtenerUsuario();
+
         $sidebarContent = file_get_contents("view/template/sidebar.mustache");
+        $footerContent = file_get_contents("view/template/footer.mustache");
+        $headerContent = file_get_contents("view/template/header.mustache");
 
         $this->presenter->render("view/perfil.mustache", [
             "sidebar" => $sidebarContent,
+            "footer" => $footerContent,
+            "header" => $headerContent,
+            'nombre_usuario' => $user['nombre_usuario'],
+            'id' => $id_usuario,
+            'Path_img_perfil' => $user['Path_img_perfil'],
+            'banner' => $user['banner'],
+
         ], [
-            'includeHeader' => false,
+            'includeHeader' => true,
             'includeFooter' => false,
             'includeSidebar' => true,
         ]);
     }
-
-
-
-    public function a()
-    {
-        $sidebarContent = file_get_contents("view/template/sidebar.mustache");
-
-        // No incluir header ni footer
-        $this->presenter->render("view/a.mustache", [
-               "sidebar" => $sidebarContent,
-        ]);
-    }
-
-
-
-
-/*
 
         public  function registro($data){
         $errors = [];
@@ -151,117 +145,171 @@ class UsuarioController
         echo $this->presenter->render('view/login.mustache');
     }
 
+
     public function validarUsuario($formData)
     {
-        $nombre_usuario = $formData['nombre_usuario'] ?? null;
+        $email = $formData['email'] ?? null;
         $contrasenia = $formData['contrasenia'] ?? null;
 
         // Usa el modelo para validar al usuario
-        $user = $this->model->loginUser($nombre_usuario, $contrasenia);
+        $user = $this->model->loginUser($email, $contrasenia);
 
-        if ($user && isset($user['activo']) && $user['activo'] == 1) {
+        if ($user && $user['activo'] == 1) {
             $sesion = new ManejoSesiones();
             $sesion->iniciarSesion($user);
-            $user = $sesion->obtenerUsuario();
             $id_usuario = $sesion->obtenerUsuarioID();
             $fotoIMG = $user['Path_img_perfil'] ?? 'Invitado';
 
-            // Redirige según el rol del usuario
-            if ($user['rol'] == 1) {
-                $this->presenter->render('view/home.php', [
-                    'nombre_usuario' => $user['nombre_usuario'],
-                    'id' => $id_usuario,
-                    'Path_img_perfil' => $fotoIMG]);
-            }
-            exit;
+            $sidebarContent = file_get_contents("view/template/sidebar.mustache");
+            $footerContent = file_get_contents("view/template/footer.mustache");
+            $headerContent = file_get_contents("view/template/header.mustache");
+
+            // Renderizar la vista principal
+            $this->presenter->render("view/home.mustache", [
+                "sidebar" => $sidebarContent,
+                "footer" => $footerContent,
+                "header" => $headerContent,
+                'nombre_usuario' => $user['nombre_usuario'],
+                'id' => $id_usuario,
+                'Path_img_perfil' => $fotoIMG,
+            ], [
+                'includeHeader' => true,
+                'includeFooter' => true,
+                'includeSidebar' => true,
+            ]);
+
         } else {
             $this->presenter->render("view/login.mustache", [
-                'error' => 'Nombre de usuario o contraseña incorrectos'
+                'error' => 'Correo o contraseña incorrectos, o cuenta inactiva'
             ]);
         }
     }
 
-    public function usuarioSugerirPregunta()
+    /*public function cambiarImagen($formData)
     {
         $sesion = new ManejoSesiones();
         $id_usuario = $sesion->obtenerUsuarioID();
-
-        $data = [
-            'Pregunta' => $_POST['pregunta'] ?? '',
-            'OpcionA' => $_POST['optionA'] ?? '',
-            'OpcionB' => $_POST['optionB'] ?? '',
-            'OpcionC' => $_POST['optionC'] ?? '',
-            'OpcionD' => $_POST['optionD'] ?? '',
-            'OpcionCorrecta' => $_POST['opcionCorrecta'] ?? '',
-            'Categoria' => $_POST['categoriaElegida'] ?? ''
-        ];
-
-        $this->model->crearSugerenciaPregunta($data, $id_usuario);
-        $partidas = $this->modelPartida->obtenerPartidasEnCurso($id_usuario);
-        $mejoresPuntajesJugador = $this->modelPartida->trearMejoresPuntajesJugadores();
         $user = $sesion->obtenerUsuario();
-        $fotoIMG = $user['Path_img_perfil'] ?? 'Invitado';
-        echo $this->presenter->render("view/home.mustache", [
-            'partidas' => $partidas,
-            'puntajes' => $mejoresPuntajesJugador,
-            'nombre_usuario' => $user['nombre_usuario'],
-            'Path_img_perfil' => $fotoIMG,
-        ]);
-    }
+        $nombre_usuario = $user['nombre_usuario'];
+        if (isset($_FILES['fotoPerfil']) && $_FILES['fotoPerfil']['error'] === UPLOAD_ERR_OK) {
+            $this->model->cambiarFotoPerfil($nombre_usuario, $_FILES['fotoPerfil']);
+            vistaPerfil();
+            /* $fotoTempPath = $_FILES['fotoPerfil']['tmp_name'];
+             $fotoNombre = basename($_FILES['fotoPerfil']['name']);
+             $fotoDestino = "public/imagenes/usuarios/" . $fotoNombre;
 
-    public function reportarPregunta()
+             // Mover la imagen al directorio destino
+             if (move_uploaded_file($fotoTempPath, $fotoDestino)) {
+                 // Actualizar la ruta en la base de datos
+                 $this->model->cambiarFotoPerfil($fotoNombre);
+             } else {
+                 // Manejar error al mover la imagen
+                 echo "Error al guardar la imagen.";
+             }*/
+      /*  } else {
+            // Manejar error al subir la imagen
+            echo "No se recibió ninguna imagen o hubo un error al subirla.";
+        }
+    }*/
+
+    public function cambiarFotoPerfil()
     {
         $sesion = new ManejoSesiones();
-        $usuario = $sesion->obtenerUsuario();
         $id_usuario = $sesion->obtenerUsuarioID();
-        $idUsuario = $usuario['id'] ?? 'Invitado';
         $user = $sesion->obtenerUsuario();
-        $fotoIMG = $user['Path_img_perfil'] ?? 'Invitado';
-        $id_partida = isset($_POST['id_partida']) ? $_POST['id_partida'] : null;
-        $actualizarPartida = $this->modelPartida->actualizarPartida($id_partida);
 
-        if (isset($_POST['descripcionSeleccionada']) && isset($_POST['id_pregunta'])) {
+        if (!$id_usuario) {
+            die("El usuario no está autenticado.");
+        }
 
-            $data = [
-                'Pregunta_id' => $_POST['id_pregunta'],
-                'Descripcion' => $_POST['selectMotivo'],
-                'Usuario_id' => $idUsuario,
-                'nombre_usuario' => $user['nombre_usuario']
-            ];
+        if (isset($_FILES['fotoPerfil']) && $_FILES['fotoPerfil']['error'] === UPLOAD_ERR_OK) {
+            // Obtener información del archivo
+            $archivo = $_FILES["fotoPerfil"]["name"];
+            $rutaTemporal = $_FILES["fotoPerfil"]["tmp_name"];
 
-            $this->model->crearReportePregunta($data, $idUsuario);
-            $partidas = $this->modelPartida->obtenerPartidasEnCurso($usuario['id']);
-            $mejoresPuntajesJugador = $this->modelPartida->trearMejoresPuntajesJugadores();
-            echo $this->presenter->render("view/home.mustache", ['partidas' => $partidas,
-                'partidas' => $partidas,
-                'puntajes' => $mejoresPuntajesJugador,
-                'nombre_usuario' => $user['nombre_usuario'],
-                'Path_img_perfil' => $fotoIMG,
-            ]);
+            // Carpeta de destino
+            $directorioDestino = $_SERVER['DOCUMENT_ROOT'] . "/Torneo/public/imagenes/usuarios/";
+
+            // Crear un nombre único para el archivo
+            $nombreImagen = pathinfo($archivo, PATHINFO_FILENAME);
+            $extension = pathinfo($archivo, PATHINFO_EXTENSION);
+            $rutaDestino = $directorioDestino . $nombreImagen . "_" . time() . "." . $extension;
+
+            // Mover el archivo
+            if (move_uploaded_file($rutaTemporal, $rutaDestino)) {
+                $nombreArchivoGuardado = $nombreImagen . "_" . time() . "." . $extension;
+
+                // Actualizar la base de datos
+                $this->model->cambiarFotoPerfil($id_usuario, $nombreArchivoGuardado);
+
+                // Redirigir al perfil
+                $this->vistaPerfil();
+            } else {
+                die("Error al mover el archivo al servidor.");
+            }
         } else {
-            echo "Faltan datos en el formulario.";
+            die("No se recibió ninguna imagen o hubo un error al subirla.");
         }
     }
 
-    public function tiempoAcabado(){
-        $sesion = new ManejoSesiones();
-        $usuario = $sesion->obtenerUsuario();
-        $id_usuario = $sesion->obtenerUsuarioID();
-        $idUsuario = $usuario['id'] ?? 'Invitado';
-        $user = $sesion->obtenerUsuario();
-        $fotoIMG = $user['Path_img_perfil'] ?? 'Invitado';
-        $id_partida = isset($_POST['id_partida']) ? $_POST['id_partida'] : null;
-        $actualizarPartida = $this->modelPartida->actualizarPartida($id_partida);
-        $partidas = $this->modelPartida->obtenerPartidasEnCurso($usuario['id']);
-        $mejoresPuntajesJugador = $this->modelPartida->trearMejoresPuntajesJugadores();
-        echo $this->presenter->render("view/home.mustache", ['partidas' => $partidas,
-            'partidas' => $partidas,
-            'puntajes' => $mejoresPuntajesJugador,
-            'nombre_usuario' => $user['nombre_usuario'],
-            'Path_img_perfil' => $fotoIMG,
-        ]);
-    }
 
-*/
+    public function cambiarBanner()
+     {
+         $sesion = new ManejoSesiones();
+         $id_usuario = $sesion->obtenerUsuarioID();
+         $user = $sesion->obtenerUsuario();
+
+         if (!$id_usuario) {
+             die("El usuario no está autenticado.");
+         }
+
+         if (isset($_FILES['fotoBanner']) && $_FILES['fotoBanner']['error'] === UPLOAD_ERR_OK) {
+             // Obtener información del archivo
+             $archivo = $_FILES["fotoBanner"]["name"];
+             $rutaTemporal = $_FILES["fotoBanner"]["tmp_name"];
+
+             // Carpeta de destino
+             $directorioDestino = $_SERVER['DOCUMENT_ROOT'] . "/Torneo/public/imagenes/usuarios/";
+
+             // Crear un nombre único para el archivo
+             $nombreImagen = pathinfo($archivo, PATHINFO_FILENAME);
+             $extension = pathinfo($archivo, PATHINFO_EXTENSION);
+             $rutaDestino = $directorioDestino . $nombreImagen . "_" . time() . "." . $extension;
+
+             // Mover el archivo
+             if (move_uploaded_file($rutaTemporal, $rutaDestino)) {
+                 $nombreArchivoGuardado = $nombreImagen . "_" . time() . "." . $extension;
+
+                 // Actualizar la base de datos
+                 $this->model->cambiarBanner($id_usuario, $nombreArchivoGuardado);
+
+                 // Redirigir al perfil
+                 $this->vistaPerfil();
+             } else {
+                 die("Error al mover el archivo al servidor.");
+             }
+         } else {
+             die("No se recibió ninguna imagen o hubo un error al subirla.");
+         }
+     }
+
+    public function cambiarPlataformaStream() {
+        $sesion = new ManejoSesiones();
+        $id_usuario = $sesion->obtenerUsuarioID();
+
+        if (!$id_usuario) {
+            die("El usuario no está autenticado.");
+        }
+
+        if (isset($_POST['plataformaStream'])) {
+            $nuevaUrl = $_POST['plataformaStream'];
+
+            $this->model->actualizarPlataformaStream($id_usuario, $nuevaUrl);
+
+            $this->vistaPerfil();
+        } else {
+            die("No se recibió ninguna URL.");
+        }
+    }
 
 }
