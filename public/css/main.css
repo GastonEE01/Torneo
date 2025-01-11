@@ -105,7 +105,7 @@ main {
     width: 100%;
     height: 100vh;
     padding: 50px;
-    background-image: url(fondo-seccion.svg);
+    background-image: url(../imagenes/PUSH-texto.svg);
     background-color: #282828;
     background-size: cover;
 }
