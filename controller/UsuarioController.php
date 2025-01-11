@@ -63,7 +63,7 @@ class UsuarioController
             "sidebar" => $sidebarContent,
             "footer" => $footerContent,
         ], [
-            'includeFooter' => true,
+            'includeFooter' => false,
             'includeSidebar' => true,
         ]);
     }
@@ -165,7 +165,7 @@ class UsuarioController
                 'id' => $id_usuario,
                 'Path_img_perfil' => $fotoIMG,
             ], [
-                'includeFooter' => true,
+                'includeFooter' => false,
                 'includeSidebar' => true,
             ]);
 
