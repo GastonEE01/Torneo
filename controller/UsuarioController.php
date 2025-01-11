@@ -58,14 +58,11 @@ class UsuarioController
     public function vistaHome() {
         $sidebarContent = file_get_contents("view/template/sidebar.mustache");
         $footerContent = file_get_contents("view/template/footer.mustache");
-        $headerContent = file_get_contents("view/template/header.mustache");
 
         $this->presenter->render("view/home.mustache", [
             "sidebar" => $sidebarContent,
             "footer" => $footerContent,
-            "header" => $headerContent,
         ], [
-            'includeHeader' => true,
             'includeFooter' => true,
             'includeSidebar' => true,
         ]);
@@ -78,19 +75,16 @@ class UsuarioController
 
         $sidebarContent = file_get_contents("view/template/sidebar.mustache");
         $footerContent = file_get_contents("view/template/footer.mustache");
-        $headerContent = file_get_contents("view/template/header.mustache");
 
         $this->presenter->render("view/perfil.mustache", [
             "sidebar" => $sidebarContent,
             "footer" => $footerContent,
-            "header" => $headerContent,
             'nombre_usuario' => $user['nombre_usuario'],
             'id' => $id_usuario,
             'Path_img_perfil' => $user['Path_img_perfil'],
             'banner' => $user['banner'],
 
         ], [
-            'includeHeader' => true,
             'includeFooter' => false,
             'includeSidebar' => true,
         ]);
@@ -162,18 +156,15 @@ class UsuarioController
 
             $sidebarContent = file_get_contents("view/template/sidebar.mustache");
             $footerContent = file_get_contents("view/template/footer.mustache");
-            $headerContent = file_get_contents("view/template/header.mustache");
 
             // Renderizar la vista principal
             $this->presenter->render("view/home.mustache", [
                 "sidebar" => $sidebarContent,
                 "footer" => $footerContent,
-                "header" => $headerContent,
                 'nombre_usuario' => $user['nombre_usuario'],
                 'id' => $id_usuario,
                 'Path_img_perfil' => $fotoIMG,
             ], [
-                'includeHeader' => true,
                 'includeFooter' => true,
                 'includeSidebar' => true,
             ]);
